@@ -5,11 +5,9 @@ import torch.nn as nn
 import torch.nn.functional as F 
 from torch.autograd import Variable
 import numpy as np
-import cv2 
-import matplotlib.pyplot as plt
-from util import count_parameters as count
-from util import convert2cpu as cpu
-from util import predict_transform
+import cv2
+from .util import convert2cpu as cpu
+from .util import predict_transform
 
 class test_net(nn.Module):
     def __init__(self, num_layers, input_size):
@@ -65,8 +63,6 @@ def parse_cfg(cfgfile):
 
     return blocks
 #    print('\n\n'.join([repr(x) for x in blocks]))
-
-import pickle as pkl
 
 class MaxPoolStride1(nn.Module):
     def __init__(self, kernel_size):
