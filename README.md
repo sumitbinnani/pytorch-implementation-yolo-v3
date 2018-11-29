@@ -24,5 +24,4 @@ git clone https://github.com/sumitbinnani/pytorch-implementation-yolo-v3.git
 mkdir weights
 cd weights
 wget https://pjreddie.com/media/files/yolov3.weights 
-cd ..
 ```
