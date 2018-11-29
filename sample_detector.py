@@ -1,3 +1,4 @@
+import argparse
 import logging
 import os
 
@@ -77,6 +78,15 @@ if __name__ == "__main__":
     import random
     import cv2
 
+    parser = argparse.ArgumentParser(description='Detect and Track')
+    parser.add_argument("--input", dest="input_file",
+                        help="path for video file",
+                        default="video.mp4")
+    parser.add_argument("--output", dest="output_file",
+                        help="path for processed video file",
+                        default="output.mp4")
+    parsed_args = parser.parse_args()
+
 
     def pipeline(img):
         ret = detector.get_localization(img)
@@ -97,10 +107,9 @@ if __name__ == "__main__":
 
     detector = Detector()
     colors = pickle.load(open("pallete", "rb"))
-    output = 'test_yolo.mp4'
     start = time.time()
-    clip1 = VideoFileClip("../../car25_compressed.mp4").subclip(180, 200)
+    clip1 = VideoFileClip(parsed_args.input_file).subclip(180, 200)
     clip = clip1.fl_image(pipeline)
-    clip.write_videofile(output, audio=False)
+    clip.write_videofile(parsed_args.output_file, audio=False)
     end = time.time()
     print(round(end - start, 2), 'Seconds to finish')
